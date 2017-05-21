@@ -15,7 +15,7 @@ import java.util.Map.Entry;
 
 import org.junit.Test;
 
-public class AnyClass {
+public class LasVegas {
 	public static final Map<Byte, String> encodingMap = new LinkedHashMap();
 	public static final Map<String, Byte> decodingMap = new LinkedHashMap();
 	
@@ -63,16 +63,5 @@ public class AnyClass {
 			out.write(b);
 		}
 		out.close();
-	}
-	
-	@Test
-	public void test() throws Exception {
-		System.out.println(encodingMap);
-		System.out.println(decodingMap);
-		String str = encrypt("/Users/chenli/Desktop/SwaggerFactory.java",
-				"/Users/chenli/Desktop/Encrypted_SwaggerFactory.java");
-		System.out.println(str);
-		decrypt("/Users/chenli/Desktop/Encrypted_SwaggerFactory.java", 
-				"/Users/chenli/Desktop/Decrypted_SwaggerFactory.java");
 	}
 }
