@@ -60,7 +60,9 @@ public class LasVegas {
 		Map<Integer, File> fileMap = new TreeMap<>();
 		StringBuilder fileString = new StringBuilder();
 		for (File file : files) {
-			fileMap.put(new Integer(file.getName()), file);
+			try {
+				fileMap.put(new Integer(file.getName()), file);
+			} catch (Exception e) {}// File name is not an integer.
 		}
 		for (Entry<Integer, File> entry : fileMap.entrySet()) {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(entry.getValue()));
@@ -69,10 +71,12 @@ public class LasVegas {
 		}
 		File decryptedFile = new File(encryptedFolderPath + "/file.zip");
 		FileOutputStream out = new FileOutputStream(decryptedFile);
+		byte[] bytes = new byte[fileString.length() / 2];
 		for (int i = 0; i < fileString.length(); i += 2) {
 			byte b = decodingMap.get(fileString.substring(i, i + 2));
-			out.write(b);
+			bytes[i / 2] = b;
 		}
+		out.write(bytes);
 		out.close();
 	}
 }
